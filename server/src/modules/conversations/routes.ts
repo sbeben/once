@@ -23,7 +23,6 @@ export const wsHandler: FastifyPluginCallback<ConversationRoutesOpts> = (
     preValidation: jwtAuth,
     handler: (req, reply) => {
       // this will handle http requests
-      //console.log("hahh");
       if (reply.statusCode === 401) {
         reply.code(401).send("GTFO");
       }

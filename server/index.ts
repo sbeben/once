@@ -11,6 +11,7 @@ import fastifyAuth from "@fastify/auth";
 import { createClient } from "@supabase/supabase-js";
 import { authRoutes } from "./src/modules/auth/routes.js";
 import { wsHandler } from "./src/modules/conversations/routes.js";
+import { searchHandle } from "./src/modules/search/routes.js";
 
 export const db = createClient(
   process.env.DB_URL || "",
@@ -64,6 +65,7 @@ fastify.register(authRoutes);
 fastify.register(websocket, { options: { clientTracking: true } });
 fastify.register(wsHandler);
 
+fastify.register(searchHandle);
 // host: '0.0.0.0' after port
 fastify.listen(
   { port: parseInt(process.env.PORT || "3001") },

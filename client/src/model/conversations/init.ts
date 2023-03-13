@@ -20,6 +20,7 @@ import {
   webSocketConnectionFailed,
   webSocketMessageReceived,
 } from ".";
+import { $searchQuery } from "../search";
 import { WSConversation } from "./types";
 
 // sample({
@@ -37,7 +38,7 @@ sample({
 
 sample({
   clock: goToChatClicked,
-  target: createOrJoinConversationFx,
+  target: [createOrJoinConversationFx, $searchQuery.reinit],
 });
 
 sample({
@@ -47,7 +48,7 @@ sample({
 
 sample({
   clock: selectConversation,
-  target: $currentConversationId,
+  target: [$currentConversationId, $searchQuery.reinit],
 });
 
 const { roomList, roomCreated, roomJoined, roomMessage } = splitMap({

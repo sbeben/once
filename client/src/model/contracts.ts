@@ -6,7 +6,7 @@ export type FetchedUser = {
   //avatar: string
   created_at: string;
   updated_at: string;
-  role: "client" | "shop";
+  role: "client";
 };
 
 export type FetchedMessage = {
@@ -27,4 +27,18 @@ export type FetchedConversation = {
   messages: FetchedMessage[];
   created_at: string;
   updated_at: string;
+};
+
+export type FetchedPost = {
+  id: string;
+  author?: FetchedUser;
+  text: string;
+  //images: string[];
+  created_at: string;
+  updated_at: string;
+};
+
+export type FetchedProfile = {
+  user: FetchedUser;
+  posts: FetchedPost[];
 };

@@ -8,14 +8,14 @@ import { RouterProvider, createRoutesView } from "atomic-router-solid";
 import { createBrowserHistory } from "history";
 import "@/model/api/init";
 import "@/model/auth/init";
+import "@/model/posts/init";
+import "@/model/search/init";
+import "@/model/profile/init";
 import "@/model/conversations/init";
 import {
-  activitiesRoute,
   authRoute,
-  catalogueRoute,
   chatsRoute,
   homeRoute,
-  mapRoute,
   profileRoute,
   routes,
 } from "@/shared/lib/routes";

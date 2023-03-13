@@ -30,3 +30,11 @@ export const createUser = async (user: CreateUser): DBResponse<DBUser> => {
     .single()) as any;
   return { data, error };
 };
+
+export const searchUser = async (query: string): DBResponse<DBUser> => {
+  const { data, error } = (await db
+    .from("users")
+    .select()
+    .ilike("name", `%${query}%`)) as any;
+  return { data, error };
+};

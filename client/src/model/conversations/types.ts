@@ -1,3 +1,6 @@
+import { ItemOfArray } from "@/shared/lib/utility";
+import { UnitValue } from "effector";
+import { $contacts } from ".";
 import { FieldChange } from "../api/types";
 
 export type GoToChat = { userId: string };
@@ -52,3 +55,6 @@ export type MessageFormData = {
 } & MessageDraft;
 
 export type MessageDraftChange = FieldChange<MessageDraft>;
+
+export type Contacts = UnitValue<typeof $contacts>;
+export type Contact = ItemOfArray<Contacts>;

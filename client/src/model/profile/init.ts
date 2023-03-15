@@ -6,6 +6,7 @@ import { $searchQuery } from "../search";
 
 sample({
   clock: goToProfileClicked,
+  filter: (data) => Boolean(data),
   fn: ({ id }) => {
     return { params: { id } } as RouteParamsAndQuery<{ id: string }>;
   },
@@ -14,5 +15,7 @@ sample({
 
 sample({
   clock: loadProfileFx.doneData,
-  trget: $profileInfo,
+  target: $profileInfo,
 });
+
+$profileInfo.watch((v) => console.log("profile", v));

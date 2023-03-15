@@ -1,3 +1,4 @@
+import { MIN_SEARCH_QUERY_LENGTH } from "@/shared/lib/constants";
 import { sample } from "effector";
 import { throttle } from "patronum";
 import {
@@ -8,7 +9,11 @@ import {
   search,
   searchFx,
 } from ".";
-import { $contacts } from "../conversations";
+import {
+  $contacts,
+  goToChatClicked,
+  selectConversation,
+} from "../conversations";
 
 sample({
   clock: changeSearchQuery,
@@ -18,20 +23,20 @@ sample({
 sample({
   clock: changeSearchQuery,
   source: $searchQuery,
-  filter: (query) => query.length > 2,
+  filter: (query) => query.length >= MIN_SEARCH_QUERY_LENGTH,
   target: search,
 });
 
-sample({
-  clock: search,
-  source: { contacts: $contacts, query: $searchQuery },
-  fn: ({ contacts, query }) => {
-    return contacts
-      ? contacts.filter((c) => c.user.name.toLowerCase().includes(query))
-      : null;
-  },
-  target: $foundContacts,
-});
+// sample({
+//   clock: search,
+//   source: { contacts: $contacts, query: $searchQuery },
+//   fn: ({ contacts, query }) => {
+//     return contacts
+//       ? contacts.filter((c) => c.user.name.toLowerCase().includes(query))
+//       : null;
+//   },
+//   target: $foundContacts,
+// });
 
 const throttledSearch = throttle({
   source: search,
@@ -41,6 +46,7 @@ const throttledSearch = throttle({
 sample({
   clock: throttledSearch,
   source: $searchQuery,
+  filter: (query) => query.length >= MIN_SEARCH_QUERY_LENGTH,
   target: searchFx,
 });
 
@@ -49,4 +55,15 @@ sample({
   target: $foundUsers,
 });
 
-searchFx.finally.watch((v) => console.log("search", v));
+sample({
+  clock: [goToChatClicked, selectConversation],
+  target: $searchQuery.reinit,
+});
+
+sample({
+  clock: $searchQuery.updates.filterMap((query) => query.length === 0),
+  target: $foundUsers.reinit,
+});
+
+$foundContacts.updates.watch((v) => console.log("foundC", v));
+$foundContacts.watch((v) => console.log("fondU", v));

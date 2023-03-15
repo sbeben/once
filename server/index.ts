@@ -7,11 +7,18 @@ import websocket from "@fastify/websocket";
 import cors from "@fastify/cors";
 import fastifyJWT from "@fastify/jwt";
 import fastifyAuth from "@fastify/auth";
-
+import {
+  serializerCompiler,
+  validatorCompiler,
+} from "fastify-type-provider-zod";
 import { createClient } from "@supabase/supabase-js";
+
 import { authRoutes } from "./src/modules/auth/routes.js";
 import { wsHandler } from "./src/modules/conversations/routes.js";
 import { searchHandle } from "./src/modules/search/routes.js";
+import { profileRoutes } from "./src/modules/profile/routes.js";
+import { errorHandler } from "./src/modules/error/index.js";
+import { jwtAuth } from "./src/modules/auth/handlers.js";
 
 export const db = createClient(
   process.env.DB_URL || "",
@@ -21,6 +28,8 @@ export const db = createClient(
 const fastify: FastifyInstance = Fastify({
   logger: true,
 });
+fastify.setValidatorCompiler(validatorCompiler);
+fastify.setSerializerCompiler(serializerCompiler);
 
 fastify.register(fastifyAuth);
 fastify.register(fastifyJWT, {
@@ -61,11 +70,14 @@ fastify.register(cors, {
 });
 
 fastify.register(authRoutes);
+fastify.register(profileRoutes);
 
 fastify.register(websocket, { options: { clientTracking: true } });
 fastify.register(wsHandler);
 
 fastify.register(searchHandle);
+
+fastify.setErrorHandler(errorHandler);
 // host: '0.0.0.0' after port
 fastify.listen(
   { port: parseInt(process.env.PORT || "3001") },

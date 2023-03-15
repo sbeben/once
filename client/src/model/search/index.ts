@@ -1,6 +1,7 @@
-import { createEffect, createEvent, createStore } from "effector";
+import { combine, createEffect, createEvent, createStore } from "effector";
 import { backendRequestFx } from "..";
 import { FetchedUser } from "../contracts";
+import { $contacts } from "../conversations";
 import { Contacts } from "../conversations/types";
 
 export const changeSearchQuery = createEvent<string>();
@@ -17,5 +18,15 @@ export const searchFx = createEffect<string, FetchedUser[]>(async (query) => {
   })) as FetchedUser[];
 });
 
+export const $foundContacts = combine(
+  { contacts: $contacts, query: $searchQuery },
+  ({ contacts, query }) => {
+    if (!contacts) return null;
+    return (
+      contacts.filter((c) =>
+        c.user.name.toLowerCase().includes(query.toLowerCase())
+      ) ?? []
+    );
+  }
+);
 export const $foundUsers = createStore<FetchedUser[] | null>(null);
-export const $foundContacts = createStore<Contacts | null>(null);

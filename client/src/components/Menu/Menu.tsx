@@ -7,7 +7,7 @@ import { Container } from "./Style";
 export const Menu: Component = () => {
   return (
     <Container>
-      <Link to={profileRoute}>
+      <Link to={profileRoute} params={{ id: "me" }}>
         <Title>P</Title>
       </Link>
       <Link to={chatsRoute}>

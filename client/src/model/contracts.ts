@@ -3,10 +3,10 @@ export type FetchedUser = {
   email: string;
   name: string;
   password?: string;
+  role: "client";
   //avatar: string
   created_at: string;
   updated_at: string;
-  role: "client";
 };
 
 export type FetchedMessage = {

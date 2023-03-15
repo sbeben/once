@@ -20,6 +20,6 @@ export const routes = [
   { path: "/chat", route: chatsRoute },
   { path: "/activities", route: activitiesRoute },
   { path: "/catalogue", route: catalogueRoute },
-  { path: "/profile", route: profileRoute },
+  { path: "/profile/:id", route: profileRoute },
   { path: "/404", route: notFoundRoute },
 ];

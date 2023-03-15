@@ -11,7 +11,6 @@ export const findUserByEmail = async (email: string): DBResponse<DBUser> => {
   return { data, error };
 };
 
-//TODO slice password?
 export const findUserById = async (id: string): DBResponse<DBUser> => {
   const { data, error } = (await db
     .from("users")

@@ -48,6 +48,7 @@ type ColorMap = {
 
   white: string;
   black: string;
+  grey: string;
 
   text: string;
   textSecondary: string;
@@ -128,6 +129,9 @@ type ZIndex = {
 type Sizes = {
   headerHeight: string;
   menuHeight: string;
+  headerWithBorder: string;
+  sidebarWidth: string;
+  sidebarWithBorder: string;
 };
 
 type WindowWidth = {

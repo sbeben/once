@@ -4,7 +4,7 @@ export const Container = styled("div")`
   position: sticky;
   top: 0;
   left: 0;
-  height: 5rem;
+  height: ${(props) => props.theme.sizes.headerHeight};
   width: 100%;
   border-style: solid;
   border-top: none;
@@ -17,10 +17,16 @@ export const Container = styled("div")`
   align-items: center;
 `;
 
+export const LogoWrap = styled("div")<{ isMobile: boolean }>`
+  width: ${(props) =>
+    props.isMobile ? "100%" : props.theme.sizes.sidebarWidth};
+  flex-shrink: 0;
+`;
+
 export const Logo = styled("span")`
   font-size: ${(props) => props.theme.font.size.large};
   font-weight: ${(props) => props.theme.font.weight.bold};
-  padding-left: 2rem;
+  padding-left: 1rem;
   color: ${(props) => props.theme.color.black};
   cursor: pointer;
 `;

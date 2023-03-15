@@ -18,7 +18,7 @@ const palette = {
   black072: "hsla(201, 88%, 3%, 0.72)",
 
   grey: "#7d94a0",
-  greyEasy: "#c7d4db",
+  greyEasy: "#efefef",
   greyMedium: "#4b5b63",
   greyBold: "#272f34",
 
@@ -51,6 +51,7 @@ export const color = {
 
   white: palette.white,
   black: palette.black,
+  grey: palette.greyEasy,
 
   text: palette.greyBold,
   textSecondary: palette.greyMedium,
@@ -171,8 +172,11 @@ export const zIndex = {
 };
 
 export const sizes = {
-  headerHeight: "6rem",
+  headerHeight: "5rem",
+  headerWithBorder: "5.3rem",
   menuHeight: "5rem",
+  sidebarWidth: "32rem",
+  sidebarWithBorder: "32.1rem",
 };
 
 // export const breakpoints = generateMedia({

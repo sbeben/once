@@ -10,11 +10,13 @@ import {
   selectConversation,
   sendMessage,
 } from "@/model/conversations";
+import { $isSearching } from "@/model/search";
 import { Button } from "@/shared/ui/Button";
 import { Textarea } from "@/shared/ui/Textarea";
 import { Title } from "@/shared/ui/Title";
 import { useUnit } from "effector-solid";
 import { Component, createEffect, For, Match, Show, Switch } from "solid-js";
+import { SearchResults } from "../SearchResults";
 import {
   ChatContainer,
   Contact,
@@ -39,8 +41,10 @@ export const Chat: Component = () => {
     send,
     isChatting,
     isSendDisabled,
+    isSearching,
   } = useUnit({
     isMobile: $isMobile,
+    isSearching: $isSearching,
     contacts: $contacts,
     select: selectConversation,
     isChatting: $isChatting,
@@ -53,17 +57,21 @@ export const Chat: Component = () => {
 
   const Contacts: Component = () => {
     return (
-      <ContactsContainer isMobile={isMobile()}>
-        <For each={contacts()} fallback={<div>Loading</div>}>
-          {(contact) => (
-            <ContactItem
-              onClick={() => select(contact.id)}
-              name={contact.user.name}
-              lastMessage={contact.lastMessage}
-            />
-          )}
-        </For>
-      </ContactsContainer>
+      <Switch fallback={<SearchResults />}>
+        <Match when={!isSearching()}>
+          <ContactsContainer isMobile={isMobile()}>
+            <For each={contacts()} fallback={<div>Loading</div>}>
+              {(contact) => (
+                <ContactItem
+                  onClick={() => select(contact.id)}
+                  name={contact.user.name}
+                  lastMessage={contact.lastMessage}
+                />
+              )}
+            </For>
+          </ContactsContainer>
+        </Match>
+      </Switch>
     );
   };
 

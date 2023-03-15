@@ -1,11 +1,8 @@
 import { Component, onCleanup, onMount } from "solid-js";
-import {
-  createHistoryRouter,
-  RouteParams,
-  RouteParamsAndQuery,
-} from "atomic-router";
-import { RouterProvider, createRoutesView } from "atomic-router-solid";
+import { createHistoryRouter } from "atomic-router";
 import { createBrowserHistory } from "history";
+import { useUnit } from "effector-solid";
+import { RouterProvider, createRoutesView } from "atomic-router-solid";
 import "@/model/api/init";
 import "@/model/auth/init";
 import "@/model/posts/init";
@@ -27,6 +24,7 @@ import { GlobalStyles } from "@/shared/ui/Style/global";
 import { ProfilePage } from "@/pages/profile";
 import { ChatsPage } from "@/pages/chats";
 import { AppGate, setWindowSize } from "@/model/api";
+import { $isSearching } from "@/model/search";
 
 export const router = createHistoryRouter({ routes });
 const history = createBrowserHistory();

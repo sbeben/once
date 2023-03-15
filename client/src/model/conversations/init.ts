@@ -38,7 +38,7 @@ sample({
 
 sample({
   clock: goToChatClicked,
-  target: [createOrJoinConversationFx, $searchQuery.reinit],
+  target: createOrJoinConversationFx,
 });
 
 sample({
@@ -48,7 +48,7 @@ sample({
 
 sample({
   clock: selectConversation,
-  target: [$currentConversationId, $searchQuery.reinit],
+  target: $currentConversationId,
 });
 
 const { roomList, roomCreated, roomJoined, roomMessage } = splitMap({

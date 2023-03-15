@@ -10,14 +10,16 @@ export const DesktopContainer = styled("div")`
 export const ContactsContainer = styled("div")<{ isMobile: boolean }>`
   height: 100%;
   position: sticky;
-  top: 5rem;
+  top: ${(props) => props.theme.sizes.headerWithBorder};
   left: 0;
-  width: ${(props) => (props.isMobile ? "100%" : "32rem")};
+  width: ${(props) =>
+    props.isMobile ? "100%" : props.theme.sizes.sidebarWidth};
   display: flex;
   flex-direction: column;
   overflow-y: auto;
   border-right: ${(props) =>
     !props.isMobile ? `0.1rem solid ${props.theme.color.black}` : "none"};
+  flex-shrink: 0;
 `;
 export const Contact = styled("div")``;
 export const ContactName = styled("div")`

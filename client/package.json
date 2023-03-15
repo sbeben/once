@@ -15,7 +15,7 @@
     "vite-plugin-solid": "^2.5.0"
   },
   "dependencies": {
-    "@types/node": "^18.15.0",
+    "@types/node": "^18.15.3",
     "atomic-router": "^0.7.1",
     "atomic-router-solid": "^0.8.0",
     "effector": "^22.5.0",

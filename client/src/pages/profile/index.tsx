@@ -10,7 +10,6 @@ const preloadedProfileRoute = chainRoute({
     effect: loadProfileFx,
     mapParams: ({ params }) => params.id,
   },
-  openOn: $profileInfo.updates,
 });
 
 export const ProfilePage = createRouteView({

@@ -2,7 +2,7 @@
 
 A messenger where you are restricted to send one message a day to each contact.
 
-# Why:
+### Why:
 
 - Anxiety and lack of concentration caused by  
   endless flow of information
@@ -12,7 +12,7 @@ A messenger where you are restricted to send one message a day to each contact.
 - The limiteless ability to upload information into the web leads to  
   increasing of CO<sub>2</sub> emission and an increase in the land occupied by huge data centers
 
-# Stack
+### Stack
 
 This project is under development and is being used as a demo repo and developing polygon.
 

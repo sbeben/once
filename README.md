@@ -1,8 +1,8 @@
-## once
+## Once
 
 A messenger where you are restricted to send one message a day to each contact.
 
-### Why:
+### Why
 
 - Anxiety and lack of concentration caused by  
   endless flow of information
@@ -16,7 +16,7 @@ A messenger where you are restricted to send one message a day to each contact.
 
 This project is under development and is being used as a demo repo and developing polygon.
 
-**frontend** technologies:
+**Frontend** technologies:
 
 - Vite
 - TypeScript

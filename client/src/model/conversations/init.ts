@@ -4,6 +4,7 @@ import { RouteParamsAndQuery } from "atomic-router";
 import { sample } from "effector";
 import { splitMap } from "patronum";
 import {
+  $contacts,
   $conversations,
   $currentConversation,
   $currentConversationId,

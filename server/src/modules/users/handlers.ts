@@ -27,6 +27,7 @@ export const createUser = async (user: CreateUser): DBResponse<DBUser> => {
     .insert(user)
     .select()
     .single()) as any;
+  console.log(data, error);
   return { data, error };
 };
 

@@ -1,6 +1,5 @@
 import { oneDayInMs } from "@/shared/lib/constants";
 import { combine, createEffect, createEvent, createStore } from "effector";
-import { FetchedConversation } from "../contracts";
 import { GoToChat, WSConversation, WSEventReceived, WSMessage } from "./types";
 
 export let socket: WebSocket;
@@ -37,6 +36,7 @@ export const initWebsocketFx = createEffect<void, void>(() => {
 
 export const selectConversation = createEvent<string>();
 export const $conversations = createStore<WSConversation[] | null>(null);
+export const $conversationsLoading = $conversations.map((c) => !!c);
 export const $contacts = $conversations.map((conversations) => {
   return (
     conversations?.map((conv) => {
@@ -44,7 +44,7 @@ export const $contacts = $conversations.map((conversations) => {
       return {
         id: conv.id,
         user,
-        lastMessage: conv.messages.at(-1).text ?? null,
+        lastMessage: conv.messages?.at(-1)?.text ?? null,
       };
     }) ?? null
   );

@@ -87,6 +87,7 @@ export const authRoutes: FastifyPluginCallback<AuthRoutes> = (
         role,
       });
       if (data) {
+        console.log(data);
         res.status(200).send(data);
       }
     }

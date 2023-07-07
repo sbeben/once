@@ -1,6 +1,6 @@
 import { createEffect, sample } from "effector";
-import { RouteParams, RouteParamsAndQuery } from "atomic-router";
 import { authRoute, homeRoute } from "@/shared/lib/routes";
+import { webSocketConnectionFailed } from "./conversations";
 
 export type FilesData = { files?: File[] };
 export type ReqData = Record<string, string> & FilesData;
@@ -63,13 +63,17 @@ export const backendRequestFx = createEffect<
   return result;
 });
 
-backendRequestFx.finally.watch((v) => console.log("backendRequest", v));
+backendRequestFx.finally.watch((v) => console.log("Backend request", v));
 
 sample({
   clock: backendRequestFx.failData,
   filter: ({ status }) => status === 401,
-  fn: () => ({} as RouteParamsAndQuery<RouteParams>),
-  target: authRoute.navigate,
+  target: authRoute.open,
+});
+
+sample({
+  clock: webSocketConnectionFailed,
+  target: authRoute.open,
 });
 
 sample({

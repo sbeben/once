@@ -6,6 +6,7 @@ import {
   $isChatting,
   $isSendMessageDisabled,
   $messageTextInput,
+  $conversationsLoading,
   changeMessageText,
   selectConversation,
   sendMessage,
@@ -46,6 +47,7 @@ export const Chat: Component = () => {
     isMobile: $isMobile,
     isSearching: $isSearching,
     contacts: $contacts,
+    loading: $conversationsLoading,
     select: selectConversation,
     isChatting: $isChatting,
     messages: $currentConversationMessages,
@@ -57,8 +59,8 @@ export const Chat: Component = () => {
 
   const Contacts: Component = () => {
     return (
-      <Switch fallback={<SearchResults />}>
-        <Match when={!isSearching()}>
+      <Switch
+        fallback={
           <ContactsContainer isMobile={isMobile()}>
             <For each={contacts()} fallback={<div>Loading</div>}>
               {(contact) => (
@@ -70,6 +72,10 @@ export const Chat: Component = () => {
               )}
             </For>
           </ContactsContainer>
+        }
+      >
+        <Match when={isSearching()}>
+          <SearchResults />
         </Match>
       </Switch>
     );
